@@ -37,6 +37,17 @@ class Todo
     #[ManyToMany(targetEntity: Tag::class)]
     private ?string $tags = null;
 
+    function __construct(
+        ?string $id, ?bool $checked, ?string $todobody, ?DateTime $createTime, ?string $tags = null
+    ){
+        $this->id = $id;
+        $this->checked = $checked;
+        $this->todobody = $todobody;
+        $this->createTime = $createTime;
+        $this->doneTime = null;
+        $this->tags = $tags;
+    }
+
     public function getId(): ?string
     {
         return $this->id;

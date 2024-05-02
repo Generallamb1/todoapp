@@ -1,2 +1,10 @@
 version: "2"
 authtoken: 2fEBxfBwCu5vex8cCyGYOuIERbs_2UrRwTnoWPqNeuL1zL3VJ
+
+tunnels:
+  website:
+    addr: 80
+    schemes:
+      - http
+    inspect: false
+    proto: localhost:80
