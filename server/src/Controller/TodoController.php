@@ -75,10 +75,23 @@ class TodoController extends AbstractController
         return new Response(Response::HTTP_OK);
     }
 
-    // #[Route('/todo', name: 'app_todo', methods:['PUT'])]
-    // public function updateNode(EntityManagerInterface $entityManager, $id): JsonResponse
-    // {
+    #[Route('/todo', name: 'app_todo', methods:['PUT'])]
+    public function updateNote(EntityManagerInterface $entityManager): Response
+    {
+        $request = Request::createFromGlobals();
+        $content = json_decode($request->getContent());
 
-    // }
+        $todo = $entityManager->getRepository(Todo::class)->find($content->id);
+        
+        ($content->checked) ? $todo->setDoneTime(new \DateTime('')) : $todo->setDoneTime(null);
+        ($content->tags) ? $todo->setTags($content->tags) : null;
+        ($content->todoBody) ? $todo->setTodoBody($content->todoBody) : null;
+        $todo->setChecked($content->checked);
+
+        $entityManager->persist($todo);
+        $entityManager->flush();
+
+        return new Response(Response::HTTP_OK);
+    }
 
 }

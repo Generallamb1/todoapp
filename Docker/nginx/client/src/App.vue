@@ -1,22 +1,24 @@
 <script setup>
-  import axios from 'axios';
-  import {onMounted, ref} from 'vue';
+import axios from 'axios';
+import {onMounted, ref, defineAsyncComponent} from 'vue';
 
-  import CreateNoteComponent from './components/CreateNoteComponent.vue';
-  import NoteList from './components/NoteList.vue';
-  import TagList from './components/TagList.vue';
+import CreateNoteComponent from './components/CreateNoteComponent.vue';
+import NoteList from './components/NoteList.vue';
+import TagList from './components/TagList.vue';
+import EditWindow from './components/EditWindow.vue'
 
-  const items = ref([])
+const items = ref([])
 
-  onMounted(async () => {
-    try{
-      const { data } = await axios.get('http://127.0.0.1:8000/todo')
-      items.value = data
-    } 
+onMounted(async () => {
+  try{
+    const { data } = await axios.get('http://127.0.0.1:8000/todo')
+    items.value = data
+  } 
     catch (err) {
-      console.log(err)
-    }
-  })
+    console.log(err)
+  }
+})
+
 
 </script>
 
@@ -29,6 +31,7 @@
       <!-- <tag-list/> -->
       <create-note-component/>
       <note-list :items="items"/>
+      <!-- <edit-window :todo=" "/> -->
     </div>
   </div>
 </template>

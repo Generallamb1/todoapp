@@ -12,12 +12,10 @@ function createTodo(todoText) {
         tags: null
     })
     .then((response) => {
-        // this.$router.go()
     }, 
     (error) => {
         console.log(error);
     });
-
 }
 </script>
     

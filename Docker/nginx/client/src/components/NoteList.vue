@@ -1,15 +1,20 @@
 <script setup>
-  import Note from './Note.vue';
+  import {defineAsyncComponent} from 'vue';
+
   defineProps({
     items: Array
   })
 
+
+const Note = defineAsyncComponent(() => 
+  import('./Note.vue')
+)
   
   </script>
 
 <template>
     <div class="bg-blue-500 m-10 rounded-lg p-8 w-s2/4">
-        <note 
+        <Note
             v-for="item in items"
             :checked="item.checked"
             :todoBody="item.todoBody"
